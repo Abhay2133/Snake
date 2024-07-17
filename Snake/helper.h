@@ -110,4 +110,4 @@ void drawText(Screen& screen, string text, int x, int y);
 
 void flog(const std::string& message);
 
-
+void clearScreen(Screen& screen);

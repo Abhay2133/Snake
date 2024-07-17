@@ -83,6 +83,11 @@ void keyboard() {
         }
     }
 }
+
+void testReadWrite()
+{
+    
+}
 /*
 Vector getScreenSize() {
     CONSOLE_SCREEN_BUFFER_INFO info;

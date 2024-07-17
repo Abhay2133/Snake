@@ -113,6 +113,10 @@ void Snake::setSize(int size)
 void Snake::update(Screen& screen)
 {
 	if (isPaused) return;
+	if (isDead)
+	{
+		return;
+	}
 	// updating body positions
 	setPixel(screen, body.back()->pos.x, body.back()->pos.y, ' ');
 	for (int i = body.size() - 1; i > 0; i--)

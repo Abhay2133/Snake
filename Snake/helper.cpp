@@ -131,6 +131,7 @@ void drawText(Screen& screen, string text, int x, int y)
 	}
 }
 
+
 void flog(const std::string& message) {
 	std::ofstream log_file("log.txt", std::ios_base::out | std::ios_base::app);
 	if (log_file.is_open()) {
@@ -139,6 +140,17 @@ void flog(const std::string& message) {
 	}
 	else {
 		std::cerr << "Error opening log file!" << std::endl;
+	}
+}
+
+void clearScreen(Screen& screen)
+{
+	for (int y = 0; y < screen.height; y++)
+	{
+		for (int x = 0; x < screen.width; x++)
+		{
+			screen.pixels[y][x] = ' ';
+		}
 	}
 }
 
