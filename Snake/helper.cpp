@@ -1,3 +1,4 @@
+#include <functional>
 #include "helper.h"
 #include<iostream>
 #include <iostream>
@@ -32,7 +33,7 @@ void home() {
 	printf("\x1B[H");
 }
 
-void drawScreen(Screen& screen, int _sleep=33) {
+void drawScreen(Screen& screen, int _sleep = 33) {
 	home();
 	for (int y = 0; y < screen.height; y++) {
 		string line(screen.pixels[y].begin(), screen.pixels[y].end()); // Use range-based for constructor
@@ -107,15 +108,43 @@ void _captureKeyboard(Queue<char>& keysQueue, bool& Continue) {
 
 	while (Continue) {
 		ReadConsoleInput(hIn, &InRec, 1, &NumRead);
-		if (InRec.EventType == KEY_EVENT) {
-			char keyChar = InRec.Event.KeyEvent.uChar.AsciiChar;
-			keysQueue.push(keyChar);
-		}
+		if (InRec.EventType != KEY_EVENT) continue;
+		if (!InRec.Event.KeyEvent.bKeyDown) continue;
+
+		char keyChar = InRec.Event.KeyEvent.uChar.AsciiChar;
+		string message = "";
+		message += keyChar;
+		flog(message + "\n");
+		keysQueue.push(keyChar);
+	}
+}
+
+int randint(int min, int max)
+{
+	return rand() % (max - min + 1) + min;
+}
+
+void drawText(Screen& screen, string text, int x, int y)
+{
+	for (int i = 0; i < text.size(); i++)
+	{
+		setPixel(screen, x + i, y, text[i]);
+	}
+}
+
+void flog(const std::string& message) {
+	std::ofstream log_file("log.txt", std::ios_base::out | std::ios_base::app);
+	if (log_file.is_open()) {
+		log_file << message;
+		log_file.close();
+	}
+	else {
+		std::cerr << "Error opening log file!" << std::endl;
 	}
 }
 
 void startKeyboardCapture(Queue<char>& keysQueue, bool& Continue) {
-	std::thread *eventThread = new std::thread([&keysQueue, &Continue] {
+	std::thread* eventThread = new std::thread([&keysQueue, &Continue] {
 		_captureKeyboard(keysQueue, Continue);
 		});
 	//eventThread->detach();
@@ -125,4 +154,16 @@ int clamp(int num, int min, int max) {
 	if (num < min) return min;
 	if (num > max) return max;
 	return num;
+}
+
+void movePixel(Screen& screen, char c, Vec2D& pos, const function<void(void)>& posUpdater)
+{
+	movePixel(screen, ' ', c, pos, posUpdater);
+}
+
+void movePixel(Screen& screen, char bg, char c, Vec2D& pos, const function<void(void)>& posUpdater)
+{
+	setPixel(screen, pos.x, pos.y, bg);
+	posUpdater();
+	setPixel(screen, pos.x, pos.y, c);
 }

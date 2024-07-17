@@ -127,14 +127,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="game.cpp" />
+    <ClCompile Include="entities.cpp" />
+    <ClCompile Include="core.cpp" />
+    <ClCompile Include="EventEmitter.cpp" />
+    <ClCompile Include="game_scene.cpp" />
     <ClCompile Include="helper.cpp" />
-    <ClCompile Include="Snake.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="test.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="context.h" />
     <ClInclude Include="entities.h" />
-    <ClInclude Include="game.h" />
+    <ClInclude Include="core.h" />
+    <ClInclude Include="EventEmitter.h" />
+    <ClInclude Include="game_scene.h" />
     <ClInclude Include="helper.h" />
     <ClInclude Include="Snake.h" />
     <ClInclude Include="test.h" />
