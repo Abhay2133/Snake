@@ -49,6 +49,8 @@ public:
 	Vec2D speed = { 1,1 };
 	char bodySprite;
 	char headSprite;
+	bool isPaused = false;
+	bool isDead = false;
 
 	static Vec2D getNewPos(Unit* tail);
 	static Unit* createNewPart(Unit* tail, char c, Vec2D& speed);

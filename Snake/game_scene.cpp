@@ -32,15 +32,9 @@ void GameScene::handleInput()
 	while (!keysQueue->isEmpty()) {
 		char key = keysQueue->pop();
 		// std::cout << key;
+		snake.handleInput(key);
 		switch (key) {
 
-			// Handling Movement
-		case 'w':
-		case 'a':
-		case 's':
-		case 'd':
-			snake.handleInput(key);
-			break;
 		}
 	}
 }
@@ -55,6 +49,7 @@ void GameScene::updateEntities()
 void GameScene::renderScreen()
 {
 	string scoreTxt = "Score : " + to_string(score);
+	createRect(*screen, 0, 0, screen->width - 2, screen->height - 2);
 	drawText(*screen, scoreTxt, screen->width - scoreTxt.size() - 5, 3);
 	drawScreen(*screen, _sleepMs);
 }
@@ -70,4 +65,24 @@ void GameScene::handleCollisions()
 		snake.setSize(snake.body.size() + 1);
 		score += 1;
 	}
+
+	// HEAD and WALL collision
+	auto pos = snakeHead->pos;
+	if (pos.y == 0) 
+	{
+		snakeHead->pos.y = screen->height - 1;
+	}
+	else if (pos.y == screen->height - 1)
+	{
+		snakeHead->pos.y = 1;
+	}
+	else if (pos.x == 0)
+	{
+		snakeHead->pos.x = screen->width - 1;
+	}
+	else if (pos.x == screen->width - 1)
+	{
+		snakeHead->pos.x = 1;
+	}
+
 }

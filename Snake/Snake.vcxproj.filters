@@ -44,16 +44,10 @@
     <ClInclude Include="test.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Snake.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="core.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="entities.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="context.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="game_scene.h">

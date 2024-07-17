@@ -110,11 +110,10 @@ void _captureKeyboard(Queue<char>& keysQueue, bool& Continue) {
 		ReadConsoleInput(hIn, &InRec, 1, &NumRead);
 		if (InRec.EventType != KEY_EVENT) continue;
 		if (!InRec.Event.KeyEvent.bKeyDown) continue;
-
 		char keyChar = InRec.Event.KeyEvent.uChar.AsciiChar;
-		string message = "";
-		message += keyChar;
-		flog(message + "\n");
+		// string message = "";
+		// message += keyChar;
+		// flog(message + "\n");
 		keysQueue.push(keyChar);
 	}
 }

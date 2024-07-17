@@ -81,21 +81,13 @@ Unit* Snake::createNewPart(Unit* tail, char c, Vec2D& speed)
 
 void Snake::handleInput(char input)
 {
-	switch (input)
-	{
-	case 'w':
-		moves.push(DIR::north);
-		break;
-	case 'a':
-		moves.push(DIR::west);
-		break;
-	case 's':
-		moves.push(DIR::south);
-		break;
-	case 'd':
-		moves.push(DIR::east);
-		break;
-	}
+	if (input == 'p') isPaused = !isPaused;
+	if (isPaused) return;
+	auto head = body[0];
+	if (input == 'w' && head->dir.y != 1) moves.push(DIR::north);
+	else if (input == 's' && head->dir.y != -1) moves.push(DIR::south);
+	else if (input == 'a' && head->dir.x != 1) moves.push(DIR::west);
+	else if (input == 'd' && head->dir.x != -1) moves.push(DIR::east);
 }
 
 void Snake::setSize(int size)
@@ -120,6 +112,7 @@ void Snake::setSize(int size)
 
 void Snake::update(Screen& screen)
 {
+	if (isPaused) return;
 	// updating body positions
 	setPixel(screen, body.back()->pos.x, body.back()->pos.y, ' ');
 	for (int i = body.size() - 1; i > 0; i--)
