@@ -46,7 +46,7 @@ void GameScene::handleInput()
 			snake.handleInput(key);
 			break;
 		case 'r':
-			if (snake.isDead) restart();
+			restart();
 		}
 	}
 }
