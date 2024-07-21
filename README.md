@@ -13,7 +13,10 @@ This is a classic Snake game implemented in C++ for Windows console.
 * Game ends when the snake hits the wall or itself.
 * Press 'R' to restart the game.
 * Press 'P' to pause and resume the game.
-* Optional: Difficulty levels with increasing speed. (You can add this feature)
+
+**PREVIEW**
+
+![Game Preview](preview/sanke_preview.gif)
 
 **Requirements:**
 
