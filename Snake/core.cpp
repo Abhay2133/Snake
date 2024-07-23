@@ -1,7 +1,10 @@
 ﻿#include "core.h"
 #include "game_scene.h"
 
-Game::Game() : Game(120, 30) {}
+constexpr auto _HEIGHT_ = 20;
+constexpr auto _WIDTH_ = 80;
+
+Game::Game() : Game(_WIDTH_, _HEIGHT_) {}
 Game::Game(int width, int height) : 
 screen(width, height, ' ')
 {
